@@ -1,0 +1,262 @@
+@font-face{font-family:"Jost";src:url("../schrift/jost.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Source Sans 3";src:url("../schrift/source-sans.woff2") format("woff2");font-weight:200 900;font-display:swap}
+@font-face{font-family:"Jost Ersatz";src:local("Century Gothic"),local("Futura"),local("Arial");size-adjust:96%;ascent-override:107%;descent-override:37%;line-gap-override:0%}
+@font-face{font-family:"Source Ersatz";src:local("Segoe UI"),local("Roboto"),local("Arial");size-adjust:93%;ascent-override:104%;descent-override:29%;line-gap-override:0%}
+
+:root{
+  /* Grundwerte, FDP Styleguide 1.4 */
+  --cyan:#00a0e2;--dunkelblau:#074ea1;--magenta:#e6007d;--magenta-text:#c4006a;--tinte:#0a111a;--weiss:#fff;--nebel:#e9f5fb;--grau-hell:#c9d3df;
+  /* Bedeutung */
+  --flaeche:var(--weiss);--text:var(--tinte);--akzent:var(--magenta);--plakat:var(--cyan);--balken:var(--dunkelblau);
+  --titel:"Jost","Jost Ersatz",sans-serif;--fliess:"Source Sans 3","Source Ersatz",sans-serif;
+  --rand:20px;--kipp:-3deg;--abschnitt:72px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--fliess);font-size:18px;line-height:1.5;color:var(--text);background:var(--flaeche)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-underline-offset:4px}
+p{margin:0 0 16px}
+:focus-visible{outline:3px solid var(--tinte);outline-offset:3px}
+.plakat :focus-visible,.dunkel :focus-visible,.fuss :focus-visible{outline-color:var(--weiss)}
+.sprung{position:absolute;left:-999px}
+.sprung:focus{left:8px;top:8px;background:var(--weiss);padding:8px 12px;z-index:20}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.huelle{padding-left:var(--rand);padding-right:var(--rand)}
+
+/* Kopf */
+.kopf{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px var(--rand)}
+.marke{font-family:var(--titel);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:15px;text-decoration:none;color:var(--tinte)}
+.nav{display:none}
+.nav ul,.menue ul{list-style:none;margin:0;padding:0}
+.nav ul{display:flex;gap:28px;align-items:center}
+.nav a{font-family:var(--titel);font-weight:600;font-size:17px;text-decoration:none}
+.nav a:hover,.nav a[aria-current=page]{text-decoration:underline;text-decoration-thickness:2px}
+.kopf__knopf{display:inline-flex;align-items:center;min-height:44px;background:var(--balken);color:var(--weiss);padding:12px 16px;text-transform:uppercase;letter-spacing:.05em;font-family:var(--titel);font-size:14px;font-weight:700;text-decoration:none}
+.kopf__rechts{display:flex;align-items:center;gap:8px}
+.menue{position:relative}
+.kopf .marke{white-space:nowrap}
+.menue summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;min-height:44px;padding:12px 16px;border:2px solid var(--tinte);font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:14px}
+.menue summary::-webkit-details-marker{display:none}
+.menue[open] summary{background:var(--tinte);color:var(--weiss)}
+.menue nav{position:absolute;right:0;top:calc(100% + 8px);background:var(--weiss);min-width:240px;padding:8px 0;border:2px solid var(--tinte)}
+.menue a{display:block;padding:12px 20px;font-family:var(--titel);font-weight:700;font-size:20px;text-decoration:none;text-transform:uppercase}
+.menue a[aria-current=page]{color:var(--balken);text-decoration:underline;text-decoration-thickness:3px}
+
+/* Plakat, Balken */
+.plakat{position:relative;background:var(--plakat);overflow:hidden;padding:88px var(--rand) 56px}
+.plakat--start{min-height:100svh;display:flex;flex-direction:column;padding-bottom:0}
+.plakat__rolle{margin:0 0 20px;font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px}
+.krume ol{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-wrap:wrap;gap:8px;font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px}
+.krume li+li::before{content:"/";margin-right:8px}
+.krume a{text-decoration:none}
+.krume a:hover{text-decoration:underline}
+.balken{margin:0;font-family:var(--titel);font-weight:800;text-transform:uppercase;line-height:1;font-size:clamp(40px,12.4vw,128px);letter-spacing:-.01em;transform:rotate(var(--kipp));transform-origin:left top;display:flex;flex-direction:column;align-items:flex-start;gap:.1em}
+.balken span{display:block;background:var(--balken);color:var(--weiss);padding:.08em .22em .12em;white-space:nowrap}
+.balken span:nth-child(2){margin-left:.35em}
+.balken span:last-child:not(:only-child){background:var(--weiss);color:var(--balken)}
+.balken--seite{font-size:min(13vw,calc(84vw / (var(--n,8) * .7 + .44)))}
+.balken--klein{font-size:clamp(44px,13vw,110px)}
+.plakat__text{position:relative;z-index:2}
+.plakat__satz{margin:40px 0 0;max-width:30ch;font-size:19px;line-height:1.4;font-weight:600}
+.knoepfe{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 0}
+.knopf{display:inline-flex;align-items:center;font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:15px;text-decoration:none;padding:16px 20px;min-height:48px;transition:transform .15s}
+.knopf:hover{transform:translateY(-2px)}
+.knopf:active{transform:none}
+.knopf--magenta{background:var(--akzent);color:var(--weiss)}
+.knopf--weiss{background:var(--weiss);color:var(--balken)}
+.knopf--blau{background:var(--balken);color:var(--weiss)}
+.plakat__bild{position:relative;z-index:1;width:min(96%,440px);margin:auto -28px 0 auto;padding-top:8px}
+.plakat__bild img{width:100%}
+.plakat__name{position:absolute;z-index:3;left:var(--rand);bottom:24px;margin:0;background:var(--tinte);color:var(--weiss);font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:14px;padding:8px 12px;transform:rotate(var(--kipp))}
+.lead{margin:48px 0 0;max-width:32ch;font-size:20px;line-height:1.4;font-weight:600}
+
+/* Titel und Abschnitte */
+.titel{font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:clamp(34px,9vw,72px);line-height:1;margin:0;color:var(--balken);letter-spacing:-.01em;max-width:14ch}
+.etikett{display:inline-block;margin:0 0 32px;font-family:var(--titel);font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:16px;background:var(--plakat);color:var(--tinte);padding:8px 12px;transform:rotate(var(--kipp))}
+.abschnitt{padding:var(--abschnitt) var(--rand)}
+.dunkel{background:var(--balken);color:var(--weiss)}
+.dunkel .titel{color:var(--weiss)}
+.still{background:var(--nebel)}
+
+/* Start: Gebaut */
+.gebaut__liste{list-style:none;margin:48px 0 0;padding:0;display:grid;gap:56px}
+.gebaut__liste>li{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;align-items:start}
+.gebaut__nr{font-family:var(--titel);font-weight:800;font-size:56px;line-height:.9;color:var(--plakat)}
+.gebaut h3{font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:28px;line-height:1;margin:8px 0 8px}
+.gebaut p{margin:0;max-width:34ch}
+.gebaut__bild{grid-column:1/-1;margin:12px 0 0}
+.gebaut__bild img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 85%}
+.gebaut__zahl{grid-column:1/-1;margin:12px 0 0;aspect-ratio:1/1;background:var(--balken);color:var(--weiss);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;overflow:hidden}
+.gebaut__zahl b{font-family:var(--titel);font-weight:800;font-size:clamp(160px,56vw,260px);line-height:.8;letter-spacing:-.04em}
+.gebaut__zahl span{font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:16px;margin-top:16px;background:var(--plakat);color:var(--tinte);align-self:flex-start;padding:4px 8px;transform:rotate(var(--kipp))}
+
+/* Start: Wofür */
+.wofuer__liste{list-style:none;margin:0;padding:0}
+.wofuer__liste li{border-top:3px solid var(--weiss);padding:20px 0 28px}
+.wofuer__liste h3{font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:clamp(50px,15vw,150px);line-height:.92;margin:0 0 12px;letter-spacing:-.02em}
+.wofuer__liste p{margin:0;font-size:20px;line-height:1.35;max-width:26ch}
+.weiter{margin:56px 0 0}
+
+/* Start: Daten */
+.daten{position:relative;overflow:hidden}
+.daten .titel{position:relative;z-index:1}
+.daten__liste{list-style:none;margin:40px 0 0;padding:0;position:relative;z-index:1}
+.daten__liste li{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:baseline;padding:16px 0;border-top:2px solid var(--tinte)}
+.daten__liste li:last-child{border-bottom:2px solid var(--tinte)}
+.daten time{font-family:var(--titel);font-weight:800;font-size:34px;line-height:1;color:var(--magenta-text);font-variant-numeric:tabular-nums}
+.daten strong{display:block;font-family:var(--titel);font-weight:700;font-size:21px;line-height:1.15}
+.daten span{display:block;font-size:16px;margin-top:4px}
+.daten__jahr{position:absolute;right:-8px;top:36px;margin:0;font-family:var(--titel);font-weight:800;font-size:120px;line-height:1;color:var(--nebel);z-index:0}
+
+/* Schluss: Reden wir */
+.mitmachen{background:var(--plakat);padding:80px var(--rand) 88px;overflow:hidden}
+.mitmachen>p{max-width:32ch;font-weight:600;font-size:19px}
+.mitmachen>p:first-of-type{margin-top:48px}
+
+/* Über mich */
+.breitbild{margin:0;background:var(--plakat)}
+.breitbild img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:62% 30%}
+.bio{margin:32px 0 0;max-width:40ch;font-size:21px;line-height:1.45;font-weight:600}
+.weg{list-style:none;margin:40px 0 0;padding:0}
+.weg li{display:grid;grid-template-columns:88px 1fr;gap:16px;align-items:baseline;padding:16px 0;border-top:2px solid var(--tinte)}
+.weg li:last-child{border-bottom:2px solid var(--tinte)}
+.weg b{font-family:var(--titel);font-weight:800;font-size:32px;line-height:1;color:var(--balken);font-variant-numeric:tabular-nums}
+.weg span{font-size:19px;line-height:1.35}
+.rollen{display:grid;gap:40px;margin:48px 0 0}
+.rollen h3{font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:16px;letter-spacing:.08em;margin:0 0 12px;display:inline-block;background:var(--plakat);color:var(--tinte);padding:4px 8px;transform:rotate(var(--kipp))}
+.rollen ul{list-style:none;margin:0;padding:0}
+.rollen li{font-family:var(--titel);font-weight:600;font-size:24px;line-height:1.2;padding:12px 0;border-bottom:2px solid rgba(255,255,255,.35)}
+.kein-amt{margin:40px 0 0;max-width:40ch;font-size:19px}
+.kandidatur__zahl{margin:0;font-family:var(--titel);font-weight:800;line-height:.85;letter-spacing:-.04em;font-size:clamp(88px,26vw,360px);color:var(--balken)}
+.kandidatur__unter{display:inline-block;margin:16px 0 0;font-family:var(--titel);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:22px;background:var(--balken);color:var(--weiss);padding:8px 12px;transform:rotate(var(--kipp))}
+.kandidatur__text{margin:40px 0 0;max-width:36ch;font-size:20px}
+.fakten{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:0}
+.fakten li{padding:16px 0;border-top:2px solid var(--tinte)}
+.fakten b{display:block;font-family:var(--titel);font-weight:800;font-size:36px;line-height:1;color:var(--magenta-text)}
+.ausbildung{list-style:none;margin:32px 0 0;padding:0;counter-reset:a}
+.ausbildung li{font-family:var(--titel);font-weight:600;font-size:22px;line-height:1.25;padding:12px 0;border-top:2px solid var(--tinte)}
+
+/* Themen */
+.feld{padding:var(--abschnitt) var(--rand);border-top:3px solid var(--tinte)}
+.feld:nth-of-type(even){background:var(--nebel)}
+.feld__titel{margin:0;font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:clamp(44px,12vw,180px);line-height:.9;letter-spacing:-.02em;color:var(--balken)}
+.feld__unter{display:inline-block;margin:12px 0 0;font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:15px;background:var(--plakat);padding:4px 8px;transform:rotate(var(--kipp))}
+.feld__spalten{display:grid;gap:32px;margin:40px 0 0}
+.feld h3{font-family:var(--titel);font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:15px;margin:0 0 12px}
+.feld ul{margin:0;padding:0;list-style:none}
+.feld li{padding:12px 0;border-top:2px solid var(--tinte);font-size:19px;line-height:1.35}
+.feld__haltung{margin:0;font-family:var(--titel);font-weight:600;font-size:26px;line-height:1.2;max-width:24ch}
+.schlusszeile{padding:56px var(--rand);background:var(--balken);color:var(--weiss);font-family:var(--titel);font-weight:700;font-size:24px;line-height:1.25}
+.schlusszeile a{color:var(--weiss);text-decoration-thickness:2px}
+
+/* Stimmzettel */
+.zettelbuehne{padding:var(--abschnitt) var(--rand);background:var(--nebel)}
+.zettel{background:var(--weiss);border:2px solid var(--tinte);max-width:760px;transform:rotate(-1deg);margin:0}
+.zettel__kopf{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px;padding:20px;border-bottom:2px solid var(--tinte)}
+.zettel__kopf h2{margin:0;font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:22px;line-height:1.1}
+.zettel__kopf time{font-family:var(--titel);font-weight:800;font-size:28px;color:var(--magenta-text);font-variant-numeric:tabular-nums;white-space:nowrap}
+.zettel__zeilen{list-style:none;margin:0;padding:0;counter-reset:v}
+.zettel__zeilen li{counter-increment:v;display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--grau-hell)}
+.zettel__zeilen li::before{content:counter(v);font-family:var(--titel);font-weight:800;font-size:20px;color:var(--balken)}
+.zettel__vorlage{font-family:var(--titel);font-weight:600;font-size:19px;line-height:1.2}
+.zettel__feld{display:inline-flex;align-items:center;justify-content:center;min-width:72px;height:44px;border:2px solid var(--tinte);font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:18px}
+.zettel__feld--leer{color:transparent}
+.zettel__grund{grid-column:2/-1;margin:0;font-size:17px}
+.zettel__fuss{padding:16px 20px;font-size:16px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.zettel__status{font-family:var(--titel);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:14px}
+.zettel--leer .zettel__zeilen{padding:24px 20px;font-size:18px}
+.zettel+.zettel{margin-top:56px;transform:rotate(.6deg)}
+.quelle{font-size:15px;color:#3b4654}
+
+/* Kontakt */
+.kontaktwege{list-style:none;margin:0;padding:0}
+.kontaktwege li{border-top:3px solid var(--tinte);padding:24px 0}
+.kontaktwege li:last-child{border-bottom:3px solid var(--tinte)}
+.kontaktwege span{display:block;font-family:var(--titel);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:14px;margin-bottom:8px}
+.kontaktwege a{font-family:var(--titel);font-weight:700;font-size:clamp(22px,6.4vw,48px);line-height:1.1;color:var(--balken);word-break:break-word;text-decoration-thickness:3px}
+
+.kontaktwege__ort{margin:0;font-family:var(--titel);font-weight:700;font-size:clamp(22px,6.4vw,48px);line-height:1.1}
+.zettel__seite{display:none}
+.zettel__gross{font-family:var(--titel);font-weight:800;font-size:clamp(48px,14vw,88px);line-height:1;color:var(--magenta-text);margin:0 0 24px}
+
+/* Rechtliches */
+.recht{padding:var(--abschnitt) var(--rand);max-width:calc(68ch + 2 * var(--rand))}
+.recht h2{font-family:var(--titel);font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:.02em;margin:40px 0 12px;color:var(--balken)}
+.recht h2:first-child{margin-top:0}
+
+/* Fuss */
+.fuss{background:var(--tinte);color:var(--weiss);padding:48px var(--rand) 40px;font-size:16px}
+.fuss p{margin:0 0 12px;max-width:44ch}
+.fuss ul{list-style:none;margin:0;padding:0}
+.fuss li{margin:0 0 8px}
+.fuss a{color:var(--weiss)}
+.fuss__raster{display:grid;gap:32px}
+.fuss__rubrik{display:block;font-family:var(--titel);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--grau-hell);margin-bottom:12px}
+.fuss .marke{color:var(--weiss);font-size:18px;display:inline-block;margin-bottom:12px}
+.fuss__klein{color:var(--grau-hell);font-size:14px;margin-top:32px}
+
+@media (min-width:900px){
+  :root{--rand:56px;--abschnitt:128px}
+  body{font-size:19px}
+  .kopf{padding:24px var(--rand)}
+  .marke{font-size:18px}
+  .nav{display:block}
+  .menue,.menue-kontakt{display:none!important}
+  .zettel__seite{display:block}
+  .zettel__gross{font-size:56px}
+  .plakat{padding:136px var(--rand) 96px}
+  .plakat--start{padding:132px var(--rand) 0;min-height:max(100vh,760px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:end}
+  .plakat--start .plakat__text{align-self:start;padding-bottom:72px}
+  .plakat--start .balken{font-size:clamp(72px,8vw,128px)}
+  .plakat__satz{font-size:23px;margin-top:64px}
+  .plakat__bild{width:min(125%,700px);margin:0 -56px 0 -80px;align-self:end;padding:0}
+  .plakat__name{left:auto;right:var(--rand);bottom:40px;font-size:16px}
+  .plakat--seite{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:end}
+  .plakat--seite .lead{margin:0 0 8px;font-size:23px}
+  .balken--seite{font-size:min(112px,calc(52vw / (var(--n,8) * .7 + .44)))}
+  .gebaut__liste{grid-template-columns:repeat(3,1fr);gap:40px}
+  .gebaut__liste>li:nth-child(2){margin-top:64px}
+  .gebaut__liste>li:nth-child(3){margin-top:128px}
+  .gebaut__nr{font-size:88px}
+  .gebaut__zahl b{font-size:200px}
+  .wofuer__liste li{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);align-items:end;gap:40px;padding:24px 0 32px}
+  .wofuer__liste h3{margin:0;font-size:min(120px,8vw)}
+  .wofuer__liste p{font-size:22px;padding-bottom:12px}
+  .daten__liste{max-width:880px}
+  .daten__liste li{grid-template-columns:180px 1fr}
+  .daten time{font-size:52px}
+  .daten strong{font-size:26px}
+  .daten__jahr{font-size:360px;right:-20px;top:60px}
+  .mitmachen{padding:128px var(--rand) 144px}
+  .breitbild{padding:0 var(--rand);background:linear-gradient(var(--plakat) 50%,var(--weiss) 50%)}
+  .breitbild img{aspect-ratio:2.2/1}
+  .zweispaltig{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
+  .zweispaltig .weg{margin-top:0}
+  .bio{font-size:26px}
+  .weg li{grid-template-columns:120px 1fr}
+  .weg b{font-size:40px}
+  .weg span{font-size:21px}
+  .rollen{grid-template-columns:repeat(3,1fr);gap:56px}
+  .rollen li{font-size:26px}
+  .kandidatur{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px;align-items:end}
+  .fakten{margin-top:0}
+  .kandidatur__zahl{font-size:min(240px,16vw)}
+  .fakten b{font-size:48px}
+  .ausbildung{columns:2;column-gap:72px}
+  .ausbildung li{break-inside:avoid}
+  .feld__spalten{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px;margin-top:56px}
+  .feld__haltung{font-size:32px}
+  .schlusszeile{padding:72px var(--rand);font-size:32px}
+  .zettelbuehne{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:72px;align-items:start}
+  .zettel__kopf{padding:24px 32px}
+  .zettel__kopf h2{font-size:26px}
+  .zettel__zeilen li{padding:20px 32px;grid-template-columns:40px 1fr auto}
+  .zettel__vorlage{font-size:22px}
+  .zettel__fuss{padding:20px 32px}
+  .kontakt__raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px;align-items:start}
+  .fuss{padding:72px var(--rand) 48px}
+  .fuss__raster{grid-template-columns:5fr 2fr 2fr 3fr;gap:40px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.knopf{transition:none}}
+@media (max-width:699px){.plakat--start .knopf--weiss{display:none}}
