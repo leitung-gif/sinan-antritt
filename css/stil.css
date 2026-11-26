@@ -170,7 +170,7 @@ p{margin:0 0 16px}
 .quelle{font-size:15px;color:#3b4654}
 
 /* Kontakt */
-.kontaktwege{list-style:none;margin:0;padding:0}
+.kontaktwege{list-style:none;margin:32px 0 0;padding:0}
 .kontaktwege li{border-top:3px solid var(--tinte);padding:24px 0}
 .kontaktwege li:last-child{border-bottom:3px solid var(--tinte)}
 .kontaktwege span{display:block;font-family:var(--titel);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:14px;margin-bottom:8px}
@@ -254,6 +254,7 @@ p{margin:0 0 16px}
   .zettel__zeilen li{padding:20px 32px;grid-template-columns:40px 1fr auto}
   .zettel__vorlage{font-size:22px}
   .zettel__fuss{padding:20px 32px}
+  .kontaktwege{margin-top:0}
   .kontakt__raster{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px;align-items:start}
   .fuss{padding:72px var(--rand) 48px}
   .fuss__raster{grid-template-columns:5fr 2fr 2fr 3fr;gap:40px}
